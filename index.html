@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcus Vinicius | Product Owner & Agilista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#10B981', // Emerald 500
+                        secondary: '#6366F1', // Indigo 500
+                        dark: '#0F172A', // Slate 900
+                        card: '#1E293B', // Slate 800
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none; 
+            background: transparent; 
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: #10B981;
+            cursor: pointer;
+            margin-top: -10px; 
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #334155;
+            border-radius: 2px;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .nav-island {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #10B981, #6366F1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* WhatsApp Pulse Animation */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .whatsapp-pulse {
+            animation: pulse-green 2s infinite;
+        }
+        /* Smooth Transition for Nav */
+        #main-nav {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-scrolled {
+            transform: translateX(-50%) scale(0.90) !important;
+            background: rgba(15, 23, 42, 0.95) !important;
+            border-radius: 9999px !important;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+            width: auto !important;
+            min-width: 600px;
+        }
+        @media (max-width: 768px) {
+            .nav-scrolled {
+                min-width: 90%;
+            }
+        }
+        
+        /* MOUSE SHINE EFFECT */
+        .mouse-shine {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(16, 185, 129, 0.07), transparent 40%);
+        }
+    </style>
+</head>
+<body class="bg-dark text-slate-300 font-sans selection:bg-primary selection:text-white overflow-x-hidden relative">
+
+    <!-- Mouse Shine Overlay -->
+    <div class="mouse-shine"></div>
+
+    <!-- Floating Navigation Island -->
+    <nav id="main-nav" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] md:w-[80%] max-w-5xl nav-island rounded-2xl px-6 py-4 transition-all duration-300">
+        <div class="flex items-center justify-between">
+            <div class="flex-shrink-0 font-display font-bold text-xl text-white tracking-wider">
+                MV<span class="text-primary">.</span>DIAS
+            </div>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:block">
+                <div class="flex items-center space-x-1">
+                    <a href="#impacto" class="hover:text-primary hover:bg-white/5 transition-all px-4 py-2 rounded-full text-sm font-medium">Impacto</a>
+                    <a href="#sobre" class="hover:text-primary hover:bg-white/5 transition-all px-4 py-2 rounded-full text-sm font-medium">Sobre</a>
+                    <a href="#experiencia" class="hover:text-primary hover:bg-white/5 transition-all px-4 py-2 rounded-full text-sm font-medium">Jornada</a>
+                    <a href="#skills" class="hover:text-primary hover:bg-white/5 transition-all px-4 py-2 rounded-full text-sm font-medium">Stack</a>
+                    <a href="#recomendacoes" class="hover:text-primary hover:bg-white/5 transition-all px-4 py-2 rounded-full text-sm font-medium">Recomendações</a>
+                </div>
+            </div>
+
+            <div class="hidden md:block">
+                <a href="#contato" class="bg-primary hover:bg-emerald-600 text-white transition-all px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-primary/20">
+                    Contratar
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden text-white text-xl cursor-pointer p-2" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-4 mt-4 border-t border-white/10 pt-4 text-center">
+            <a href="#impacto" class="mobile-link text-slate-300 hover:text-primary font-medium py-2">Impacto</a>
+            <a href="#sobre" class="mobile-link text-slate-300 hover:text-primary font-medium py-2">Sobre</a>
+            <a href="#experiencia" class="mobile-link text-slate-300 hover:text-primary font-medium py-2">Jornada</a>
+            <a href="#skills" class="mobile-link text-slate-300 hover:text-primary font-medium py-2">Stack</a>
+            <a href="#recomendacoes" class="mobile-link text-slate-300 hover:text-primary font-medium py-2">Recomendações</a>
+            <a href="#contato" class="mobile-link bg-primary text-white font-bold py-3 rounded-xl mx-4 mt-2 block shadow-lg shadow-primary/20">Contratar</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Interactive Simulator -->
+    <section id="impacto" class="relative min-h-screen flex items-center justify-center pt-32 pb-10 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Text Content -->
+            <div class="space-y-8 animate-fade-in-up">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-semibold text-primary uppercase tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span>Disponível para novos desafios</span>
+                </div>
+                
+                <!-- Name & Role Emphasis -->
+                <div>
+                    <h1 class="font-display font-bold text-white leading-none tracking-tight">
+                        <span class="text-5xl md:text-7xl block mb-2">Marcus Vinicius</span>
+                    </h1>
+                    <h2 class="text-2xl md:text-3xl font-bold mt-2 gradient-text">
+                        Product Owner & Agile
+                    </h2>
+                </div>
+                
+                <!-- Slogan & Bio -->
+                <div class="space-y-4 border-l-4 border-slate-700 pl-6">
+                    <p class="text-xl text-white font-medium">
+                        Transformando Oportunidades em <span class="text-primary">Produtos Escaláveis</span>.
+                    </p>
+                    <p class="text-base text-slate-400 max-w-lg leading-relaxed">
+                        Especialista em criar roadmaps inteligentes, com experiência em reduzir churn, refatorações, escalar eficiência e transformar dados em decisões de produto.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#experiencia" class="px-8 py-3 bg-white text-dark font-bold rounded-lg hover:bg-slate-200 transition-colors shadow-lg shadow-white/10">
+                        Ver Histórico
+                    </a>
+                    <a href="https://wa.me/+5513936180824" target="_blank" class="px-8 py-3 glass-panel text-white font-bold rounded-lg hover:bg-white/10 transition-colors flex items-center gap-2 border border-white/10">
+                        <i class="fab fa-whatsapp"></i> Vamos Conversar
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interactive Impact Simulator -->
+            <div class="relative">
+                <div class="glass-panel rounded-2xl p-8 shadow-2xl border-t border-white/10 transform transition-all hover:scale-[1.01]">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-white font-display font-bold text-xl">Simulador de Impacto</h3>
+                        <span class="text-xs text-slate-500 bg-slate-900 px-2 py-1 rounded border border-slate-700">Baseado em dados reais</span>
+                    </div>
+
+                    <p class="text-sm text-slate-400 mb-8">
+                        Arraste o slider para ver o resultado da aplicação das minhas metodologias (Scrum, Kanban, Gamificação) em cenários anteriores.
+                    </p>
+
+                    <!-- The Slider -->
+                    <div class="relative mb-10 group">
+                        <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer" id="impactSlider">
+                        <div class="absolute -top-6 left-0 text-xs text-slate-500 font-mono">Antes</div>
+                        <div class="absolute -top-6 right-0 text-xs text-primary font-bold font-mono">Depois (Metodologia Marcus)</div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- Metric 1 -->
+                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center transition-all duration-500" id="card-tickets">
+                            <div class="text-slate-400 text-xs uppercase tracking-wider mb-2">Chamados/Mês</div>
+                            <div class="text-3xl font-display font-bold text-red-400 transition-colors duration-300" id="val-tickets">100</div>
+                            <div class="text-xs text-slate-500 mt-2 h-4" id="desc-tickets">Alta demanda de suporte</div>
+                        </div>
+
+                        <!-- Metric 2 -->
+                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center transition-all duration-500" id="card-prod">
+                            <div class="text-slate-400 text-xs uppercase tracking-wider mb-2">Produtividade</div>
+                            <div class="text-3xl font-display font-bold text-slate-400 transition-colors duration-300" id="val-prod">Base</div>
+                            <div class="text-xs text-slate-500 mt-2 h-4" id="desc-prod">Fluxo padrão</div>
+                        </div>
+
+                        <!-- Metric 3 -->
+                        <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 text-center transition-all duration-500" id="card-cost">
+                            <div class="text-slate-400 text-xs uppercase tracking-wider mb-2">Processos Manuais</div>
+                            <div class="text-3xl font-display font-bold text-orange-400 transition-colors duration-300" id="val-cost">100%</div>
+                            <div class="text-xs text-slate-500 mt-2 h-4" id="desc-cost">Alto custo operacional</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Decorative Code Widget -->
+                <div class="absolute -bottom-6 -right-6 glass-panel p-4 rounded-lg text-xs font-mono text-slate-400 hidden md:block animate-pulse-slow">
+                    <div>> Init Transformation...</div>
+                    <div class="text-primary">> Success.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section (NEW) -->
+    <section id="sobre" class="py-20 relative overflow-hidden bg-slate-900/50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel p-8 md:p-12 rounded-3xl border border-white/5 relative">
+                <!-- Decorative Quote Icon -->
+                <i class="fas fa-quote-right absolute top-8 right-8 text-6xl text-white/5"></i>
+                
+                <div class="flex flex-col md:flex-row gap-10 items-center">
+                    <div class="md:w-1/3 text-center md:text-left">
+                        <h2 class="text-3xl font-display font-bold text-white mb-2">Minha História</h2>
+                        <div class="w-16 h-1 bg-primary rounded-full mb-6 mx-auto md:mx-0"></div>
+                        <div class="inline-block p-4 rounded-full bg-primary/10 mb-4">
+                            <i class="fas fa-robot text-3xl text-primary"></i>
+                        </div>
+                        <p class="text-sm text-slate-400 font-medium">Da robótica à gestão de produtos</p>
+                    </div>
+                    
+                    <div class="md:w-2/3">
+                        <p class="text-slate-300 text-lg leading-relaxed mb-6">
+                            "Desde criança, nos laboratórios de <span class="text-white font-bold">robótica</span>, descobri o fascínio por resolver problemas complexos. Essa base técnica não me ensinou apenas sobre máquinas, mas despertou minha aptidão natural para liderar pessoas e orquestrar soluções."
+                        </p>
+                        <p class="text-slate-300 text-lg leading-relaxed">
+                            Após uma recolocação de carreira estratégica, encontrei na <span class="text-white font-bold">área de Produto</span> o ecossistema perfeito para unir minha sinergia com tecnologia e liderança. Foi onde descobri minha verdadeira paixão: transformar desafios caóticos em processos escaláveis e produtos de alto valor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experiencia" class="py-20 bg-slate-900 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-display font-bold text-white mb-4">Experiência & Resultados</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="relative border-l-2 border-slate-700 ml-4 md:ml-0 space-y-16">
+                
+                <!-- Job 1: PO (Detailed) -->
+                <div class="relative pl-8 md:pl-0">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-slate-900 shadow-[0_0_10px_#10B981]"></div>
+                    <div class="md:grid md:grid-cols-12 md:gap-8 group">
+                        <!-- Date -->
+                        <div class="md:col-span-3 mb-2 md:mb-0 md:text-right pt-2">
+                            <span class="text-primary font-bold block text-lg">2022 - Atual</span>
+                            <span class="text-slate-500 text-sm">Product Owner & PM</span>
+                            <span class="block mt-1 text-xs text-slate-400">Contele Soluções</span>
+                        </div>
+                        
+                        <!-- Card -->
+                        <div class="md:col-span-9 bg-card p-8 rounded-2xl border border-slate-700 hover:border-primary/50 transition-all shadow-xl">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white">Liderança de Produto & Escalabilidade</h3>
+                                    <p class="text-slate-400 mt-1 text-sm">Responsável pela gestão estratégica de backlog, roadmap e alinhamento com stakeholders.</p>
+                                </div>
+                                <i class="fas fa-rocket text-primary text-2xl opacity-50"></i>
+                            </div>
+
+                            <!-- Key Metrics Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
+                                    <div class="text-2xl font-bold text-white mb-1">-90%</div>
+                                    <div class="text-xs text-slate-400 leading-tight">Redução de Tickets (Gestão de Crise)</div>
+                                </div>
+                                <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
+                                    <div class="text-xl font-bold text-white mb-1">Refatoração</div>
+                                    <div class="text-xs text-slate-400 leading-tight">Do produto principal para escala global</div>
+                                </div>
+                                <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50">
+                                    <div class="text-xl font-bold text-white mb-1">No-code</div>
+                                    <div class="text-xs text-slate-400 leading-tight">Automação para redução de custos</div>
+                                </div>
+                            </div>
+
+                            <!-- Details -->
+                            <div class="space-y-3 mb-6">
+                                <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wide">Principais Entregas:</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-3 text-sm text-slate-400">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span>Condução de discovery.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3 text-sm text-slate-400">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span>Criação de roadmap.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3 text-sm text-slate-400">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span>Organização e planejamento de entregas com time Tech.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3 text-sm text-slate-400">
+                                        <i class="fas fa-check-circle text-primary mt-1"></i>
+                                        <span>Alinhamento de Experiencia de usuário com time de design.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Tech Stack -->
+                            <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-700/50">
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-blue-300 border border-blue-500/20">Product Strategy</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-blue-300 border border-blue-500/20">Growth & Data</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-blue-300 border border-blue-500/20">Stakeholder Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job 2: Scrum Master (Detailed) -->
+                <div class="relative pl-8 md:pl-0">
+                    <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-secondary border-4 border-slate-900"></div>
+                    <div class="md:grid md:grid-cols-12 md:gap-8 group">
+                        <!-- Date -->
+                        <div class="md:col-span-3 mb-2 md:mb-0 md:text-right pt-2">
+                            <span class="text-slate-400 font-bold block text-lg">2021 - 2022</span>
+                            <span class="text-slate-500 text-sm">Scrum Master / Agilista</span>
+                            <span class="block mt-1 text-xs text-slate-400">Contele Soluções</span>
+                        </div>
+                        
+                        <!-- Card -->
+                        <div class="md:col-span-9 bg-card p-8 rounded-2xl border border-slate-700 hover:border-secondary/50 transition-all shadow-xl">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-white">Transformação Ágil & Cultura</h3>
+                                    <p class="text-slate-400 mt-1 text-sm">Liderança na mudança de mindset da organização para metodologias ágeis.</p>
+                                </div>
+                                <i class="fas fa-users text-secondary text-2xl opacity-50"></i>
+                            </div>
+
+                            <!-- Key Metrics Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold">
+                                        <i class="fas fa-gamepad"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xl font-bold text-white">+25%</div>
+                                        <div class="text-xs text-slate-400">Produtividade via Gamificação</div>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700/50 flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary font-bold">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-xl font-bold text-white">OKRs</div>
+                                        <div class="text-xs text-slate-400">Implementação de métricas ágeis</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Details -->
+                            <div class="space-y-3 mb-6">
+                                <h4 class="text-sm font-bold text-slate-300 uppercase tracking-wide">Principais Entregas:</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-3 text-sm text-slate-400">
+                                        <i class="fas fa-check-circle text-secondary mt-1"></i>
+                                        <span>Facilitação de cerimônias (Dailies, Retros, Planning) promovendo colaboração.</span>
+                                    </li>
+                                    <li class="flex items-start gap-3 text-sm text-slate-400">
+                                        <i class="fas fa-check-circle text-secondary mt-1"></i>
+                                        <span>Criação de dashboards estratégicos para transparência de processos.</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Tech Stack -->
+                            <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-700/50">
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-purple-300 border border-purple-500/20">Agile Transformation</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-purple-300 border border-purple-500/20">OKRs & Metrics</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-purple-300 border border-purple-500/20">Facilitação</span>
+                                <span class="px-3 py-1 text-xs font-semibold rounded-full bg-slate-800 text-purple-300 border border-purple-500/20">Team Building</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Tools -->
+    <section id="skills" class="py-20 bg-dark relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px]"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-display font-bold text-white mb-4">Arsenal Técnico</h2>
+                <p class="text-slate-400">Combinação de visão estratégica com execução técnica.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Product Management -->
+                <div class="glass-panel p-6 rounded-xl border border-slate-700 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chess-king text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Gestão de Produto</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-blue-200 border border-blue-500/20">Roadmap</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-blue-200 border border-blue-500/20">Discovery</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-blue-200 border border-blue-500/20">Backlog Prioritization</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-blue-200 border border-blue-500/20">OKRs & KPIs</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-blue-200 border border-blue-500/20">User Story Mapping</span>
+                        <span class="px-3 py-1 font-semibold rounded-full bg-slate-800 text-emerald-300 border border-emerald-500/20 text-xs">Inglês Avançado</span>
+                    </div>
+                </div>
+
+                <!-- Agile & Process -->
+                <div class="glass-panel p-6 rounded-xl border border-slate-700 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-sync-alt text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Agile & Processos</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-emerald-200 border border-primary/20">Scrum Master</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-emerald-200 border border-primary/20">Kanban Specialist</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-emerald-200 border border-primary/20">Lean IT</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-emerald-200 border border-primary/20">Event Storming</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-emerald-200 border border-primary/20">Gamificação</span>
+                    </div>
+                </div>
+
+                <!-- Tech & Automation -->
+                <div class="glass-panel p-6 rounded-xl border border-slate-700 hover:-translate-y-2 transition-transform duration-300">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Tech & Automação</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-purple-200 border border-purple-500/20">n8n / Make</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-purple-200 border border-purple-500/20">Looker Studio</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-purple-200 border border-purple-500/20">Jira / GitHub Projects</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-purple-200 border border-purple-500/20">Miro / Notion</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-purple-200 border border-purple-500/20">Low-code</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section (NEW) -->
+    <section id="recomendacoes" class="py-20 bg-slate-900 border-t border-slate-800 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold tracking-widest text-xs uppercase mb-2 block">Feedback & Reconhecimento</span>
+                <h2 class="text-3xl font-display font-bold text-white mb-4">O que dizem sobre mim</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Recommendation 1 (Kelvin) -->
+                <div class="glass-panel p-8 rounded-2xl relative group">
+                    <i class="fas fa-quote-left text-4xl text-slate-700 absolute top-6 left-6 -z-10"></i>
+                    
+                    <!-- LinkedIn Shortcut -->
+                    <a href="https://www.linkedin.com/in/kelvin-rodrigues-772066166/" target="_blank" class="absolute top-6 right-6 text-slate-600 hover:text-[#0A66C2] transition-colors p-2" title="Ver LinkedIn">
+                        <i class="fas fa-external-link-alt text-xl"></i>
+                    </a>
+
+                    <p class="text-slate-300 italic mb-6 mt-2">
+                        "A visão estratégica do Marcus foi um divisor de águas para o time. Ele não só organizou nosso backlog, mas criou uma ponte vital entre negócio e tecnologia que permitiu nossa refatoração com zero impacto negativo para o cliente."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-slate-600 flex items-center justify-center overflow-hidden border-2 border-primary/30">
+                            <!-- Image Kelvin -->
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQGpXPaps3N7nA/profile-displayphoto-shrink_200_200/B4DZXUjGhjG8AY-/0/1743027729472?e=1766620800&v=beta&t=1m37VoTy8RBsvIOXYlciCZUjaTh_1Gh6f0UQ6RCC2V0" 
+                                 alt="Kelvin Rodrigues" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Kelvin Rodrigues</h4>
+                            <p class="text-slate-500 text-xs">Tech Lead @ ConteleTeams</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation 2 (Murillo) -->
+                <div class="glass-panel p-8 rounded-2xl relative border-primary/20 group">
+                    <i class="fas fa-quote-left text-4xl text-slate-700 absolute top-6 left-6 -z-10"></i>
+                    
+                    <!-- LinkedIn Shortcut -->
+                    <a href="https://www.linkedin.com/in/murillo-cabral/" target="_blank" class="absolute top-6 right-6 text-slate-600 hover:text-[#0A66C2] transition-colors p-2" title="Ver LinkedIn">
+                        <i class="fas fa-external-link-alt text-xl"></i>
+                    </a>
+
+                    <p class="text-slate-300 italic mb-6 mt-2">
+                        "A organização que o Marcus trouxe para a Squad foi fundamental. Como QA, vi o número de re-trabalho cair drasticamente graças ao refinamento técnico detalhado e aos critérios de aceite claros que ele define antes da sprint."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-slate-600 flex items-center justify-center overflow-hidden border-2 border-primary/30">
+                            <!-- Image Murillo -->
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQGRcZz7kAeY9g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1725479500534?e=1766620800&v=beta&t=dXB9l3FkKvj503cTnivmbRHcV5aW4KqS1sl4lpQ8I4o" 
+                                 alt="Murillo Cabral" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Murillo Cabral</h4>
+                            <p class="text-slate-500 text-xs">Squad Lead & QA @ ConteleTeams</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation 3 (Idevilson) -->
+                <div class="glass-panel p-8 rounded-2xl relative group">
+                    <i class="fas fa-quote-left text-4xl text-slate-700 absolute top-6 left-6 -z-10"></i>
+                    
+                    <!-- LinkedIn Shortcut -->
+                    <a href="https://www.linkedin.com/in/idevilson-junior-493a3a143/" target="_blank" class="absolute top-6 right-6 text-slate-600 hover:text-[#0A66C2] transition-colors p-2" title="Ver LinkedIn">
+                        <i class="fas fa-external-link-alt text-xl"></i>
+                    </a>
+
+                    <p class="text-slate-300 italic mb-6 mt-2">
+                        "Raro encontrar um PO que entenda tão bem as nuances do desenvolvimento Mobile. Ele traduz requisitos complexos em histórias prontas para codar, facilitando muito a vida de quem desenvolve em múltiplas plataformas."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-slate-600 flex items-center justify-center overflow-hidden border-2 border-primary/30">
+                            <!-- Image Idevilson -->
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQE6EsmqJuXI9A/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1678972968991?e=1766620800&v=beta&t=fLMYNAZCjuI1tDsKursW_afWwtss36e7oQ6QhRWiTbE" 
+                                 alt="Idevilson Junior" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Idevilson Junior</h4>
+                            <p class="text-slate-500 text-xs">Mobile Specialist (iOS/Android) @ ConteleTeams</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation 4 (Mauricio) -->
+                <div class="glass-panel p-8 rounded-2xl relative border-primary/20 group">
+                    <i class="fas fa-quote-left text-4xl text-slate-700 absolute top-6 left-6 -z-10"></i>
+                    
+                    <!-- LinkedIn Shortcut -->
+                    <a href="https://www.linkedin.com/in/mauricio-eskenazi-pernidji-9b7b221a0/" target="_blank" class="absolute top-6 right-6 text-slate-600 hover:text-[#0A66C2] transition-colors p-2" title="Ver LinkedIn">
+                        <i class="fas fa-external-link-alt text-xl"></i>
+                    </a>
+
+                    <p class="text-slate-300 italic mb-6 mt-2">
+                        "A sinergia entre Produto e Marketing atingiu outro nível com o Marcus. Ele prioriza features que não apenas resolvem dores técnicas, mas que geram argumentos de venda reais, impulsionando nossas métricas de conversão."
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-slate-600 flex items-center justify-center overflow-hidden border-2 border-primary/30">
+                            <!-- Image Mauricio -->
+                            <img src="https://media.licdn.com/dms/image/v2/D4D03AQEOseCqNQSMug/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1690923700070?e=1766620800&v=beta&t=BGUPXKsebr8uJims0WBMhqqo2urd5ehFaH1iYx1EAZI" 
+                                 alt="Mauricio Eskenazi Pernidji" 
+                                 class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Mauricio Eskenazi Pernidji</h4>
+                            <p class="text-slate-500 text-xs">Marketing Digital Specialist</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications (Enhanced) -->
+    <section class="py-16 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-display font-bold text-white mb-10 text-center">Formação Acadêmica & Certificações</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Education Card 1 -->
+                <div class="bg-card p-6 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors group">
+                    <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-graduation-cap text-slate-400 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-lg mb-1">Análise e Desenvolvimento de Sistemas</h4>
+                    <p class="text-slate-400 text-sm">Graduação</p>
+                    <p class="text-slate-500 text-xs mt-2">Faculdade Descomplica</p>
+                </div>
+
+                <!-- Education Card 2 -->
+                <div class="bg-card p-6 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors group">
+                    <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-certificate text-slate-400 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-lg mb-1">Formação em Produto</h4>
+                    <p class="text-slate-400 text-sm">Curso Livre</p>
+                    <p class="text-slate-500 text-xs mt-2">Escola DNC</p>
+                </div>
+
+                <!-- Education Card 3 -->
+                <div class="bg-card p-6 rounded-xl border border-slate-700 hover:border-slate-500 transition-colors group">
+                    <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                        <i class="fas fa-medal text-slate-400 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-white font-bold text-lg mb-1">Jornada da Transformação Lean</h4>
+                    <p class="text-slate-400 text-sm">Certificação Oficial</p>
+                    <p class="text-slate-500 text-xs mt-2">Lean IT</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Footer -->
+    <section id="contato" class="py-20 relative overflow-hidden flex flex-col items-center justify-center text-center">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark to-slate-900 -z-10"></div>
+        
+        <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+            Vamos escalar seu produto?
+        </h2>
+        <p class="text-slate-400 max-w-xl mb-10 px-4">
+            Estou pronto para trazer eficiência operacional e visão estratégica de produto para sua empresa.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+            <a href="mailto:marcus06.contato@gmail.com" class="group px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-emerald-600 transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
+                <i class="fas fa-envelope"></i>
+                Enviar Email
+            </a>
+            <a href="https://wa.me/+5513936180824" target="_blank" class="px-8 py-4 bg-[#25D366] text-white font-bold rounded-lg hover:bg-green-600 transition-colors flex items-center justify-center gap-2">
+                 <i class="fab fa-whatsapp"></i>
+                 WhatsApp
+            </a>
+            <a href="https://www.linkedin.com/in/marcus-vinicius-dos-santos-dias/" target="_blank" class="px-8 py-4 bg-slate-800 text-white font-bold rounded-lg hover:bg-slate-700 transition-colors border border-slate-700 flex items-center justify-center gap-2">
+                <i class="fab fa-linkedin"></i>
+                LinkedIn
+            </a>
+        </div>
+
+        <div class="mt-16 text-slate-600 text-sm">
+            <p>Santos/SP • (13) 9 3618-0824 • marcus06.contato@gmail.com</p>
+            <p class="mt-2 text-xs opacity-50">&copy; 2025 Marcus Vinicius. Design interativo.</p>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+5513936180824" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:scale-110 transition-transform whatsapp-pulse flex items-center justify-center group">
+        <i class="fab fa-whatsapp text-3xl"></i>
+        <span class="absolute right-full mr-3 bg-white text-dark text-xs font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            Fale comigo
+        </span>
+    </a>
+
+    <!-- Logic for Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Navbar Scroll Logic ---
+            const nav = document.getElementById('main-nav');
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            // Function to handle Nav Style based on Menu state
+            const toggleNavStyle = () => {
+                const isMenuOpen = !mobileMenu.classList.contains('hidden');
+                
+                if (isMenuOpen) {
+                    // When menu is open, disable shrinking and force solid background
+                    nav.classList.remove('nav-scrolled');
+                    nav.classList.add('bg-slate-900/95');
+                } else {
+                    // When menu is closed, revert to scroll logic
+                    nav.classList.remove('bg-slate-900/95');
+                    if (window.scrollY > 50) {
+                        nav.classList.add('nav-scrolled');
+                    } else {
+                        nav.classList.remove('nav-scrolled');
+                    }
+                }
+            };
+
+            // Toggle Mobile Menu
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Change icon
+                const icon = mobileBtn.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+                
+                // Update nav style immediately
+                toggleNavStyle();
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    toggleNavStyle(); // Reset style on close
+                });
+            });
+            
+            // Scroll Event
+            window.addEventListener('scroll', toggleNavStyle);
+            
+            // --- Mouse Shine Logic ---
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX;
+                const y = e.clientY;
+                document.body.style.setProperty('--mouse-x', `${x}px`);
+                document.body.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            // --- Impact Simulator Logic ---
+            const slider = document.getElementById('impactSlider');
+            const valTickets = document.getElementById('val-tickets');
+            const descTickets = document.getElementById('desc-tickets');
+            const cardTickets = document.getElementById('card-tickets');
+            
+            const valProd = document.getElementById('val-prod');
+            const descProd = document.getElementById('desc-prod');
+            const cardProd = document.getElementById('card-prod');
+            
+            const valCost = document.getElementById('val-cost');
+            const descCost = document.getElementById('desc-cost');
+            const cardCost = document.getElementById('card-cost');
+
+            slider.addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                
+                // Logic for Tickets (100 -> 10)
+                // Formula: 100 - (value * 0.9)
+                const currentTickets = Math.round(100 - (value * 0.9));
+                valTickets.innerText = currentTickets;
+                
+                if (value > 80) {
+                    valTickets.classList.replace('text-red-400', 'text-primary');
+                    valTickets.classList.replace('text-orange-400', 'text-primary');
+                    descTickets.innerText = "Eficiência Maximizada";
+                    cardTickets.classList.add('border-primary/50');
+                } else if (value > 40) {
+                    valTickets.classList.replace('text-red-400', 'text-orange-400');
+                    valTickets.classList.remove('text-primary');
+                    descTickets.innerText = "Contenção de Crise";
+                    cardTickets.classList.remove('border-primary/50');
+                } else {
+                    valTickets.classList.add('text-red-400');
+                    valTickets.classList.remove('text-orange-400', 'text-primary');
+                    descTickets.innerText = "Alta demanda de suporte";
+                }
+
+                // Logic for Productivity (0% -> +25%)
+                const prodGain = Math.round(value * 0.25);
+                if(value === 0) {
+                    valProd.innerText = "Base";
+                    valProd.classList.remove('text-primary');
+                } else {
+                    valProd.innerText = `+${prodGain}%`;
+                    valProd.classList.add('text-primary');
+                }
+                
+                if(value > 50) {
+                    descProd.innerText = "Gamificação Ativa";
+                    cardProd.classList.add('border-primary/50');
+                } else {
+                    descProd.innerText = "Otimizando...";
+                    cardProd.classList.remove('border-primary/50');
+                }
+
+                // Logic for Costs/Manual Process (High -> Low)
+                if(value > 90) {
+                    valCost.innerHTML = '<span class="text-xs text-primary">Automação No-code</span>';
+                    descCost.innerText = "Processos manuais eliminados";
+                    cardCost.classList.add('border-primary/50');
+                } else if (value > 10) {
+                    valCost.innerText = "Reduzindo...";
+                    descCost.innerText = "Implementando Make/n8n";
+                    cardCost.classList.remove('border-primary/50');
+                } else {
+                    valCost.innerText = "100%";
+                    descCost.innerText = "Alto custo operacional";
+                }
+
+            });
+        });
+    </script>
+</body>
+</html>
